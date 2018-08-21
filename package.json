@@ -1,0 +1,21 @@
+{
+  "name": "react-pwa",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "bs": "npm-run-all build serve",
+    "build": "react-scripts build && npm run version",
+    "serve": "cd build && serve",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "version": "node src/version.js"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.3"
+  }
+}
