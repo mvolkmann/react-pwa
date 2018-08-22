@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
-let deferredPrompt;
+let deferredPrompt, token;
 const addBtn = document.querySelector('#addToHomeScreen');
 
 window.addEventListener('beforeinstallprompt', e => {
@@ -43,7 +43,7 @@ function checkForUpdate() {
   fetch('version.txt')
     .then(res => res.text())
     .then(version => {
-      const currentVersion = sessionStorage.getItem('app-version');
+      const currentVersion = localStorage.getItem('app-version');
       if (version !== currentVersion) {
         console.info('version changed from', currentVersion, 'to', version);
         const download = window.confirm(
@@ -53,7 +53,9 @@ function checkForUpdate() {
         );
         if (download) {
           window.location.reload();
-          sessionStorage.setItem('app-version', version);
+          localStorage.setItem('app-version', version);
+        } else {
+          clearInterval(token);
         }
       }
     })
@@ -61,4 +63,11 @@ function checkForUpdate() {
     .catch(() => {}); // Ignore these errors.
 }
 
-setInterval(checkForUpdate, 5000);
+// Get the current version.
+fetch('version.txt')
+  .then(res => res.text())
+  .then(version => {
+    // Save the current version.
+    localStorage.setItem('app-version', version);
+    token = setInterval(checkForUpdate, 5000);
+  });

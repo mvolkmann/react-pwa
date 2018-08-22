@@ -11,7 +11,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to My First PWA!</h1>
         </header>
         <p className="App-intro">We are about to have some fun now!</p>
-        <p>Mark mode!</p>
+        <p>Jordan mode!</p>
       </div>
     );
   }

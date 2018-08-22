@@ -8,8 +8,11 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
+    "bd": "npm-run-all build deploy",
     "bs": "npm-run-all build serve",
     "build": "react-scripts build && npm run version",
+    "clean": "rm -rf build",
+    "deploy": "node src/deploy.js",
     "serve": "cd build && serve",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
